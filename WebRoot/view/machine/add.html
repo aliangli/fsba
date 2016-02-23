@@ -1,0 +1,19 @@
+<!doctype html>
+<html ng-app="app">
+    <head>
+        <!-- <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script> -->
+        <script src="angular-1.0.1.min.js"></script>
+        <script src="controller.js"></script>
+    </head>
+    <body>
+    <iframe height=498 width=510 src="http://player.youku.com/embed/XOTM3NTcwNjUy" frameborder=0 allowfullscreen></iframe>
+    
+        Your UDID: <input type="text" ng-model="yourname" placeholder="请输入UDID">
+        <hr>
+        UDID: {{yourname || ''}}
+		<br/><br/>
+		<input type="button" value="SAVE" ng-click="saveMachine()">
+    </body>
+</html>
+
+

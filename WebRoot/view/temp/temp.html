@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>temp.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../easyui/demo.css">
+	<link rel="stylesheet" type="text/css" href="../../css/common.css">
+	<script type="text/javascript" src="../../jQuery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../jQuery/jquery.form.js"></script>
+	<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="uploadFile.js"></script>
+    <script type="text/javascript" src="temp.js"></script>
+    <script type="text/javascript" src="team_model.js"></script>
+    <script type="text/javascript" src="arean.js"></script>
+    <style type="text/css">
+    	.tableClass{
+    		border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#efefef;
+    		margin: 12px;
+    	}
+    	
+		.tableClass td{
+			border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;
+			width: 566px;
+		}
+		
+		li{    line-height: 30px;}
+		a{margin: 10px}
+		a:link {
+		text-decoration: none;
+		}
+		a:visited {
+		text-decoration: none;
+		}
+		a:hover {
+		text-decoration: none;
+		}
+		a:active {
+		text-decoration: none;
+		}
+    </style>
+
+  </head>
+  
+  <body>
+    
+	<div id="seachToolBar"  style="padding:10px;height:auto">
+	
+		消息
+		<table class="tableClass" >
+			<tr>
+				<td>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_my_teams_applicant" iconCls="icon-mini-edit">我的球队收到所有请求</a>
+					<div id="div_my_teams_applicant">
+					
+					</div>
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+	
+		动态
+		<table class="tableClass" >
+			<tr>
+				<td>
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_my_news"  >我发布的动态</a><br/><br/>
+					用户ID:<input id="by_user_id"><br/><br/>page:<input id="by_user_page_number" value="0">
+					<a href="javascript:void(0)" style="margin: 10px" id="btn_by_user_news"  >某人的动态</a>
+					<div id="div_show_news">
+					
+					</div>
+				</td>
+				<td>
+				
+					<form id="newsForm" action="../../playerNewsController/createNews" method="post" enctype="multipart/form-data">
+						内容： 
+						<textarea name="newsContent" rows="5" cols="50" >这个app挺好玩，我们先去比赛了，你在家宅着看电视吧</textarea> 
+	    				<br/><br/>
+	    				
+	    				<input type="file" name="file" id="file" />
+	    				
+		    			<input type="hidden" name="actionType" value="createNews" />
+					    
+	    				<input type="button" value="上传" id="upload" />
+	    			</form>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_create_news" iconCls="icon-mini-edit">发布</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					
+					<input value="1" id="txt_news_id" />
+					<a href="javascript:void(0)" style="margin: 10px" id="btn_all_news_comment" >所有评论</a>
+					
+					<div id="div_show_news_comments"></div>
+				</td>
+				<td>
+					
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_focus_users_news" iconCls="icon-ok">动态圈</a>
+					<div id="div_show_users_news"></div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+		
+		球队
+		<table class="tableClass" >
+		
+			<tr>
+				<td >
+					USER_ID： <input id="team_by_user_id" type="text" value="6">
+					<a href="javascript:void(0)" style="margin: 10px" id="btn_user_team" >加入的球队</a>
+					<div id="div_user_teams"></div>
+			
+				</td>
+				<td>
+					USER_ID： <input id="create_team_user_id" type="text" value="6">
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_my_create_teams" >创建的球队</a>
+					<div id="div_user_create_teams"></div>
+				</td>
+				
+			</tr>
+		
+			<tr>
+				<td>
+					球队ID： <input id="invite_team_id" type="text" value="1">
+					队员ID： <input id="invite_user_id" type="text" value="10">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_invite_team" iconCls="icon-ok">邀请</a>
+				</td>
+				<td>
+					
+					球队ID：<input id="teamAllPlayerById" type="text" value="1">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_teamBallPlayer" iconCls="icon-mini-edit">球队的所有球员</a>
+					<div id="div_team_players"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_disband_team" iconCls="icon-mini-edit">解散球队</a>
+				</td>
+				<td>
+					球队ID： <input id="all_applicant_team_id" type="text" value="1">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_all_applicant" iconCls="icon-mini-edit">球队申请记录</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					
+					球员ID： <input id="applicantFromUserId" type="text" value="10">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_add_player" iconCls="icon-mini-edit">同意加入球员</a>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_add_player_ignore" iconCls="icon-mini-edit">忽略</a>
+				</td>
+				<td>
+					球队ID： <input id="applicant_team_id" type="text" value="1">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_send_applicant" iconCls="icon-mini-edit">申请加入球队</a>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<form id="createTeamForm" action="../../ballTeamController/createTeam" method="post" enctype="multipart/form-data">
+						
+	    				<input type="file" name="file" id="file" value="球队徽章" /><br/><br/>
+						球队名称：<input id="text_create_team_name" name="teamName" type="text" value="公牛队"><br/><br/>
+						球队宣言：<input name="teamDeclaration" type="text" value=""><br/><br/>
+						教练：<input name="teamCoach" type="text" value=""><br/><br/>
+						球衣颜色：<input name="sportswearColor" type="text" value="红色"><br/><br/>
+						城市：<input name="teamCity" type="text" value="上海"><br/><br/>
+	    				
+		    			<input type="hidden" name="actionType" value="createTeam" />
+					    
+	    				<input type="button" value="创建球队" id="btn_create_team" />
+	    			</form>
+					
+					<a href="javascript:void(0)"  id="btn_update_team" >修改球队基本信息</a>
+				</td>
+				<td>
+					<a href="javascript:void(0)"  id="btn_team_tactic" >战术</a>
+					<div id="div_team_tactic"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+		
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_team" iconCls="icon-mini-edit">球队ID获取球队</a>
+
+					球队ID：<input id="text_focus_team_id" type="text" value="1">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_focus_team_valid" iconCls="icon-mini-edit">球队关注状态</a>
+					
+					
+					
+				</td>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+		
+		场地
+		<table class="tableClass" >
+			<tr>
+				<td>
+					<a href="javascript:void(0)"  id="btn_arean" >场地</a>
+					<div id="div_arean"></div>
+				</td>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+		
+		
+		比赛
+		<table class="tableClass" >
+			<tr>
+				<td>
+					
+					比赛ID: <input id="tnt_id" type="text" value="1">
+					球队ID: <input id="tnt_alt_team_id" type="text" value="1">
+					<a href="javascript:void(0)"  id="btn_tnt_team" >参赛的球队</a>
+					<a href="javascript:void(0)"  id="btn_tnt_process" >赛程</a>
+					<a href="javascript:void(0)"  id="btn_tnt" >All比赛</a>
+					
+					<div id="div_tnt"></div>
+				</td>
+				<td>
+					<div id="div_detail_score"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					team ID: <input id="tnt_user_id" type="text" value="5">
+					<a href="javascript:void(0)"  id="btn_tnt_by_user" >Ta的比赛</a>
+					<div id="div_tnt_by_user"></div>
+					
+				</td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<!-- 我的关注 -->
+		我的关注
+		<table class="tableClass" >
+			<tr>
+				<td>
+					球队ID: <input id="txt_focus_team_id" type="text" value="">
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_focus_team"  >关注一个球队</a>
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_my_focus_teams"  >关注的所有球队</a>
+					
+					<div id="div_focus_team"></div>
+					
+				</td>
+				<td>
+					球队ID: <input id="focus_user_id" type="text" value="5">
+		
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_focus_xx"  >某人关注的人</a>
+					<a href="javascript:void(0)" style="margin: 10px"   id="btn_focus_xx_p" >关注某人的人</a>
+					
+					<br/><br/>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_focus_me" iconCls="icon-ok">关注我的人</a>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_focus" iconCls="icon-ok">我关注的人</a>
+					<div id="div_focus_players"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					球员ID: <input id="txt_focus_user_id" type="text" value="">
+					<a href="javascript:void(0)" style="margin: 10px"   id="btn_focus_user"  >关注一个球员</a>
+					<a href="javascript:void(0)" style="margin: 10px"   id="btn_is_focus_user"  >判断是否关注了球员</a>
+					
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+		</table>
+		
+		
+		<!-- 搜索 -->
+		搜索
+		<table class="tableClass" >
+			<tr>
+				<td>
+					球员: <input id="txt_search_team_name" type="text" value="cc">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_search_player" iconCls="icon-reload">搜索</a>
+					
+					<div id="div_search_players"></div>
+					
+				</td>
+				<td>
+					
+					队名：<input id="text_search_team_name" type="text" value="队">
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_search_team" iconCls="icon-reload">搜索球队</a>
+			
+					<div id="div_search_teams"></div>
+				</td>
+			</tr>
+		</table>
+		
+		<!-- 用户中心 -->
+		用户中心
+		<table id="user_center" class="tableClass" >
+			
+			<tr>
+				<td>
+					<input id="r_userName" type="text" value="">
+					<input id="r_userPhoneNumber" type="text" value="13312315555">
+					
+					
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_regedit" iconCls="icon-mini-edit">注册</a>
+				</td>
+				<td>
+					<div style="width: 80px;height: 50px;   padding: 5px; margin-left: 10px;">
+						<img alt="" id="userPhoto" src="" style="width:50px; height: 40px; ">
+					</div>
+					
+				  	<div id="div_user" style="width: 380px;height: 30px;background-color: #DBE2EC; padding: 5px;margin-left: 120px;margin-bottom: 10px;">
+				  		<label id="user_name"></label>
+				  	</div>
+				  	
+					<a href="javascript:void(0)" style="margin: 10px" id="btn_logout"  >注销</a>
+					
+					<input id="userName" type="text" value="aaa">
+					<input id="pwd" type="text" value="DWa4OPACVl8=">
+					<a href="javascript:void(0)" style="margin: 10px"  id="btn_login"  >登录</a>
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<td>
+				
+					
+					<form id="userInfoForm" action="../../fsbaUserController/alter" method="post" enctype="multipart/form-data">
+		    			
+	    				头像：
+	    				<input type="file" name="file" id="file" /><br/><br/>
+	    				
+		    			<input type="hidden" name="actionType" value="alterUser" />
+		    			<input type="hidden" name="userPassword" value="DWa4OPACVl8=" />
+		    			<input type="hidden" id="userPhotoPath" name="userPhotoPath" value="" />
+		    			手机号：<input type="text" id="userPhoneNumber" name="userPhoneNumber" value="" /><br/><br/>
+		    			地  址：<input type="text" name="userAddress" value="南京" /><br/><br/>
+		    			昵  称：<input type="text" id="aliasName" name="aliasName" value="" /><br/><br/>
+		    			性  别：<input type="text" name="userSex" value="M" /><br/><br/>
+		    			
+		    			最高得分：<input type="text" name="bestMark" value="12" /><br/><br/>
+		    			球衣号码：<input type="text" name="uniformNumber" value="13" /><br/><br/>
+		    			臂展：<input type="text" name="armLength" value="14" /><br/><br/>
+		    			站立摸高：<input type="text" name="relaxHeight" value="15" /><br/><br/>
+		    			立定跳高：<input type="text" name="jumpHeight" value="16" /><br/><br/>
+		    			助跑跳高：<input type="text" name="lungeHeight" value="17" /><br/><br/>
+	    				
+	    				
+	    				<input type="button" value="保存" id="uploadUserPhone" />
+	    				
+						<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_update_user" iconCls="icon-mini-edit">修改用户信息</a>
+	    				
+	    			</form>
+					
+					
+					
+				</td>
+				<td>
+				
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_me_invite" iconCls="icon-mini-edit">我收到的邀请</a>
+					
+					<input id="me_invite_change" class="easyui-combobox" >
+					
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_agree_invite" iconCls="icon-mini-edit">同意邀请</a>
+					<a href="javascript:void(0)" style="margin: 10px" class="easyui-linkbutton" id="btn_agree_invite_g" iconCls="icon-mini-edit">忽略</a>
+					
+				</td>
+			</tr>
+		
+		</table>
+		
+	</div>
+	
+	<div id="allBasketballPlayer"  ></div>
+	
+	
+	
+	
+  </body>
+</html>

@@ -1,0 +1,120 @@
+
+
+
+--log4j.xml
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "/WEB-INF/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<!--<param name="Target" value="System.out"/>-->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MMM dd yyyy HH:mm:ss,SSS} %-5p %c - %m%n"/>
+		</layout>
+		<!--限制输出级别  DEBUG < INFO < WARN < ERROR < FATAL-->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="FATAL"/>
+			<param name="LevelMin" value="DEBUG"/>
+		</filter>
+	</appender>
+<!--
+	<appender class="org.apache.log4j.RollingFileAppender" name="file"> 
+        <param name="File" value="ts.log" />
+        <param name="MaxFileSize" value="100KB" />
+        <param name="MaxBackupIndex" value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="=%d %-5p [%t] %-17c{2} (%13F:%L) %3x - %m%n" />
+        </layout>
+	</appender>
+-->
+	<category name="org" additivity="false">
+		<priority value="ERROR"/>
+		<appender-ref ref="console"/>
+	</category>
+	
+	<category name="com" additivity="false">
+		<priority value="DEBUG"/>
+		<appender-ref ref="console"/>
+	</category>
+	
+	<category name="com.netgear.common.interceptor" additivity="false">
+		<priority value="DEBUG"/>
+		<appender-ref ref="console"/>
+	</category>
+
+    <category name="org.springframework" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="console"/>
+    </category>
+    <category name="java.sql">
+        <priority value="ERROR" />
+        <appender-ref ref="console"/>
+    </category>
+    
+    <category name="org.apache.ibatis">
+        <priority value="ERROR" />
+        <appender-ref ref="console"/>
+    </category>
+    <category name="org.mybatis">
+        <priority value="ERROR" />
+        <appender-ref ref="console"/>
+    </category>
+    
+<!--
+    <category name="org.springframework.orm.ibatis3" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="console"/>
+    </category>
+-->
+<!-- 
+     <category name="org.apache.ibatis" additivity="false">
+        <priority value="info"/>
+        <appender-ref ref="console"/>
+    </category>
+
+     <category name="java.sql" additivity="false">
+        <priority value="info"/>
+        <appender-ref ref="console"/>
+    </category>
+    
+    <logger name="org.apache.ibatis.datasource.pooled.PooledDataSource">  
+        <level value="debug" />  
+    </logger>
+
+    <logger name="org.apache.ibatis.jdbc.ScriptRunner">
+        <level value="debug" />
+    </logger>
+
+    <logger name="org.mybatis.spring.SqlSessionFactoryBean"> 
+        <level value="debug" />
+    </logger>
+    
+	<logger name="org.apache.ibatis.jdbc.SQL">
+        <level value="debug" />
+    </logger>
+    <logger name="org.apache.ibatis.jdbc.SqlRuner">
+        <level value="debug" />
+    </logger>
+    
+    
+    <logger name="java.sql.Connection">
+        <level value="debug" />
+    </logger>
+    <logger name="java.sql.Statement">
+        <level value="debug" />
+    </logger>
+    <logger name="java.sql.PreparedStatement">  
+        <level value="debug" />
+    </logger>
+    <logger name="java.sql.ResultSet">
+        <level value="info" />
+    </logger>
+-->  
+	<root> 
+		<priority value ="info" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>

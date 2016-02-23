@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="fsba"
+  id="myeclipse.1415451490428"
+  context-root="/fsba"
+  j2ee-spec="5.0"
+  archive="fsba.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+
